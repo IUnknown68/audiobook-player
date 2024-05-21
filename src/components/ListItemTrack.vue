@@ -8,7 +8,7 @@
         {{track.title}}
       </q-item-label>
       <q-item-label caption>
-        <TrackLength :length="track.length" />
+        <AudioDuration :length="track.length" />
       </q-item-label>
     </q-item-section>
   </q-item>
@@ -23,14 +23,14 @@ import {
   useRoute,
 } from 'vue-router';
 
-import TrackLength from 'components/TrackLength.vue';
+import AudioDuration from 'components/AudioDuration.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
-  name: 'TrackItem',
+  name: 'ListItemTrack',
 
   components: {
-    TrackLength,
+    AudioDuration,
   },
 
   props: {

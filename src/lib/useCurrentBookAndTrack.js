@@ -29,10 +29,7 @@ function useCurrentBookAndTrack() {
     return '';
   });
 
-  const currentTrack = computed(() => {
-    console.log('currentTrack', trackId.value);
-    return getTrack(trackId.value);
-  });
+  const currentTrack = computed(() => getTrack(trackId.value));
 
   const trackIndex = computed(() => {
     if (currentBook.value) {

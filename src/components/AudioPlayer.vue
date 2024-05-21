@@ -8,8 +8,8 @@
       />
     </div>
     <div class="flex justify-between">
-      <TrackLength :length="currentTimeSeconds" />
-      <TrackLength :length="remainingSeconds" />
+      <AudioDuration :length="currentTimeSeconds" />
+      <AudioDuration :length="remainingSeconds" />
     </div>
 
     <div class="flex no-wrap justify-between items-center gap-md q-mb-md">
@@ -49,16 +49,14 @@
 <script>
 import {
   defineComponent,
-  reactive,
   computed,
   watch,
-  onMounted,
 } from 'vue';
 import {
   useRouter,
 } from 'vue-router';
 
-import TrackLength from 'components/TrackLength.vue';
+import AudioDuration from 'components/AudioDuration.vue';
 
 import useBookAndTrackFromProps from 'lib/useBookAndTrackFromProps';
 import { useMediaControls } from 'lib/useAudio';
@@ -72,7 +70,7 @@ export default defineComponent({
   name: 'AudioPlayer',
 
   components: {
-    TrackLength,
+    AudioDuration,
   },
 
   props: {
@@ -101,12 +99,11 @@ export default defineComponent({
       replay10,
       forward10,
       togglePlay,
-      setAudioSrc,
+      // setAudioSrc,
     } = useMediaControls();
 
     const {
       bookId,
-      currentTrack,
       currentBook,
       trackIndex,
     } = useBookAndTrackFromProps(props);
@@ -119,13 +116,16 @@ export default defineComponent({
     const currentPlayIcon = computed(() => (playing.value ? 'pause' : 'play_arrow'));
     const remainingSeconds = computed(() => durationSeconds.value - currentTimeSeconds.value);
 
-    const allButtonProps = reactive({
+    const allButtonProps = {
       round: true,
       outline: true,
       color: 'primary',
-    });
+    };
 
     function navigateTrack(track) {
+      if (!track) {
+        return;
+      }
       router.replace({
         name: 'player',
         params: {
@@ -138,33 +138,19 @@ export default defineComponent({
     function skipPrevious() {
       if (currentTime.value > MIN_TIME_IN_CHAPTER) {
         currentTime.value = 0;
-        return;
-      }
-      const previousTrack = currentBook.value.tracks[trackIndex.value - 1];
-      if (previousTrack) {
-        navigateTrack(previousTrack);
+      } else {
+        navigateTrack(currentBook.value.tracks[trackIndex.value - 1]);
       }
     }
 
     function skipNext() {
-      const nextTrack = currentBook.value.tracks[trackIndex.value + 1];
-      if (nextTrack) {
-        navigateTrack(nextTrack);
-      }
+      navigateTrack(currentBook.value.tracks[trackIndex.value + 1]);
     }
 
-    watch(ended, (newValue) => {
-      if (newValue) {
-        skipNext(true);
+    watch(ended, (hasEnded) => {
+      if (hasEnded) {
+        skipNext();
       }
-    });
-
-    watch(currentTrack, (newValue) => {
-      setAudioSrc(newValue.url);
-    });
-
-    onMounted(() => {
-      setAudioSrc(currentTrack.value.url);
     });
 
     return {

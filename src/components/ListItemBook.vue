@@ -15,7 +15,7 @@
         {{book.title}}
       </q-item-label>
       <q-item-label caption>
-        {{book.tracks.length}} Chapters, <TrackLength :length="book.length" />
+        {{book.tracks.length}} Chapters, <AudioDuration :length="book.length" />
       </q-item-label>
     </q-item-section>
   </q-item>
@@ -27,14 +27,14 @@ import {
   computed,
 } from 'vue';
 
-import TrackLength from 'components/TrackLength.vue';
+import AudioDuration from 'components/AudioDuration.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
-  name: 'BookItem',
+  name: 'ListItemBook',
 
   components: {
-    TrackLength,
+    AudioDuration,
   },
 
   props: {

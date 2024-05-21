@@ -1,7 +1,7 @@
 <template>
   <router-view v-if="app.loaded" />
   <BootLayout v-else />
-  <audio ref="audio" />
+  <audio ref="audio" :src="currentTrack?.url?.href" />
 </template>
 
 <script>
@@ -15,9 +15,7 @@ import useReactive from 'lib/useReactive';
 import BootLayout from 'layouts/BootLayout.vue';
 import useBooks from 'lib/useBooks';
 import useAudio from 'lib/useAudio';
-
-// eslint-disable-next-line no-promise-executor-return
-// const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import useCurrentBookAndTrack from 'lib/useCurrentBookAndTrack';
 
 const APP_DEFAULTS = {
   loaded: false,
@@ -31,7 +29,6 @@ const APP_DEFAULTS = {
     await loadBook('trisolaris/2');
     await loadBook('trisolaris/3');
 
-    //throw new Error('No can do');
     // eslint-disable-next-line no-console
     console.log('OK.');
   },
@@ -49,11 +46,20 @@ export default defineComponent({
     const audio = useAudio();
     const app = useReactive('app', APP_DEFAULTS);
     const darkmode = useLocalStorage('darkmode', false);
+    const {
+      currentTrack,
+    } = useCurrentBookAndTrack();
+
     useQuasar().dark.set(darkmode.value);
+
+    //watch(currentTrack, (newValue) => {
+    //  setAudioSrc(newValue.url);
+    //});
 
     return {
       app,
       audio,
+      currentTrack,
     };
   },
 });

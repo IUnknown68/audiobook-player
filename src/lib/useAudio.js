@@ -11,12 +11,7 @@ const {
   currentTime,
   duration,
   waiting,
-  // seeking,
-  // ended,
-  // stalled,
-  // buffered,
   playing,
-  // rate,
 } = mediaControls;
 
 let shouldBePlaying = false;

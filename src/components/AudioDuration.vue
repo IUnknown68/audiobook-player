@@ -1,5 +1,5 @@
 <template>
-  <span>{{prefix}}{{formatted}}</span>
+  <span>{{formatted}}</span>
 </template>
 
 <script>
@@ -26,22 +26,18 @@ function formatTrackLength(time) {
 
 //------------------------------------------------------------------------------
 export default defineComponent({
-  name: 'TrackLength',
+  name: 'AudioDuration',
 
   props: {
     length: {
       type: [Number, String],
       default: 0,
     },
-
-    prefix: {
-      type: String,
-      default: '',
-    },
   },
 
   setup(props) {
     const formatted = computed(() => formatTrackLength(parseInt(props.length, 10)));
+
     return {
       formatted,
     };

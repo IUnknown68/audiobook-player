@@ -1,15 +1,13 @@
 <template>
   <div>
-    <div>
-      <div class="text-subtitle1 text-center">
-        {{currentBook?.author}}
-      </div>
-      <div class="text-h6 text-center">
-        {{currentBook?.title}}
-      </div>
-      <div class="text-caption text-center">
-        {{currentTrack.title}} ({{trackIndex + 1}}/{{trackCount}})
-      </div>
+    <div class="text-subtitle1 text-center">
+      {{currentBook?.author}}
+    </div>
+    <div class="text-h6 text-center">
+      {{currentBook?.title}}
+    </div>
+    <div class="text-caption text-center">
+      {{currentTrack.title}} ({{trackIndex + 1}}/{{trackCount}})
     </div>
 
     <q-img

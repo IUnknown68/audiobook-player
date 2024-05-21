@@ -12,7 +12,7 @@ import {
   getTrack,
 } from './useTracks';
 
-export const BASE_URL = new URL('/audiobooks/', window.location.href);
+const BASE_URL = new URL('/audiobooks/', window.location.href);
 
 const booksMap = reactive(new Map());
 const booksList = computed(() => [...booksMap.values()]);

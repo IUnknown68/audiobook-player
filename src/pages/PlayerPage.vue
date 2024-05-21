@@ -1,6 +1,6 @@
 <template>
-  <q-page class="q-pa-md flex justify-center">
-    <div>
+  <q-page class="q-pa-md row items-start justify-center">
+    <div v-if="found" class="container-340">
       <BookHeader
         :bookId="bookId"
         :trackId="trackId"
@@ -11,7 +11,7 @@
         :trackId="trackId"
       />
 
-      <TrackList
+      <SelectTrack
         :bookId="bookId"
         :trackId="trackId"
         outlined
@@ -21,18 +21,23 @@
         options-selected-class="text-primary"
       />
     </div>
+    <q-banner v-else class="text-white bg-red container-320">
+      <span v-if="currentBook">Track not found.</span>
+      <span v-else>Book not found.</span>
+    </q-banner>
   </q-page>
 </template>
 
 <script>
 import {
   defineComponent,
+  computed,
 } from 'vue';
 
 import useCurrentBookAndTrack from 'lib/useCurrentBookAndTrack';
 
 import AudioPlayer from 'components/AudioPlayer.vue';
-import TrackList from 'components/TrackList.vue';
+import SelectTrack from 'components/SelectTrack.vue';
 import BookHeader from 'components/BookHeader.vue';
 
 //------------------------------------------------------------------------------
@@ -41,7 +46,7 @@ export default defineComponent({
 
   components: {
     AudioPlayer,
-    TrackList,
+    SelectTrack,
     BookHeader,
   },
 
@@ -50,9 +55,13 @@ export default defineComponent({
       bookId,
       trackId,
       currentBook,
+      currentTrack,
     } = useCurrentBookAndTrack();
 
+    const found = computed(() => currentBook.value && currentTrack.value);
+
     return {
+      found,
       bookId,
       trackId,
       currentBook,

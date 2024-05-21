@@ -9,7 +9,7 @@
     behavior="dialog"
   >
     <template v-slot:option="scope">
-      <TrackItem
+      <ListItemTrack
         v-bind="scope.itemProps"
         :track="scope.opt"
       />
@@ -25,14 +25,14 @@ import {
 
 import useBookAndTrackFromProps from 'lib/useBookAndTrackFromProps';
 
-import TrackItem from 'components/TrackItem.vue';
+import ListItemTrack from 'components/ListItemTrack.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
-  name: 'TrackList',
+  name: 'SelectTrack',
 
   components: {
-    TrackItem,
+    ListItemTrack,
   },
 
   props: {
