@@ -28,7 +28,7 @@
         unelevated
         color="primary"
         size="lg"
-        :disabled="disabled"
+        :loading="busy"
         :icon="currentPlayIcon"
         @click="togglePlay"
       />
@@ -43,10 +43,6 @@
         @click="skipNext"
       />
     </div>
-
-    <q-inner-loading :showing="waiting">
-      <q-spinner-tail size="50px" color="secondary" />
-    </q-inner-loading>
   </div>
 </template>
 
@@ -66,6 +62,10 @@ import TrackLength from 'components/TrackLength.vue';
 
 import useBookAndTrackFromProps from 'lib/useBookAndTrackFromProps';
 import { useMediaControls } from 'lib/useAudio';
+
+// Number of seconds that has to have passed to jump to beginning of
+// chapter instead of previous chapter:
+const MIN_TIME_IN_CHAPTER = 1;
 
 //------------------------------------------------------------------------------
 export default defineComponent({
@@ -87,16 +87,21 @@ export default defineComponent({
     },
   },
 
-  setup(props, { emit }) {
+  setup(props) {
     const router = useRouter();
 
     const {
       playing,
+      seeking,
       currentTime,
       duration,
       waiting,
       ended,
-      audioRef,
+
+      replay10,
+      forward10,
+      togglePlay,
+      setAudioSrc,
     } = useMediaControls();
 
     const {
@@ -106,7 +111,7 @@ export default defineComponent({
       trackIndex,
     } = useBookAndTrackFromProps(props);
 
-    const disabled = computed(() => !currentTrack.value);
+    const busy = computed(() => (waiting.value || seeking.value));
 
     const durationSeconds = computed(() => Math.ceil(duration.value));
     const currentTimeSeconds = computed(() => Math.floor(currentTime.value));
@@ -118,23 +123,20 @@ export default defineComponent({
       round: true,
       outline: true,
       color: 'primary',
-      disabled,
     });
-
-    let wasPlaying = false;
 
     function navigateTrack(track) {
       router.replace({
         name: 'player',
         params: {
-          bookId,
+          bookId: bookId.value,
           trackId: track.id,
         },
       });
     }
 
     function skipPrevious() {
-      if (currentTime.value) {
+      if (currentTime.value > MIN_TIME_IN_CHAPTER) {
         currentTime.value = 0;
         return;
       }
@@ -144,22 +146,6 @@ export default defineComponent({
       }
     }
 
-    function replay10() {
-      currentTime.value = Math.max(0, currentTime.value - 10);
-    }
-
-    function togglePlay() {
-      if (playing.value) {
-        audioRef.value.pause();
-      } else {
-        audioRef.value.play();
-      }
-    }
-
-    function forward10() {
-      currentTime.value = Math.min(duration.value, currentTime.value + 10);
-    }
-
     function skipNext() {
       const nextTrack = currentBook.value.tracks[trackIndex.value + 1];
       if (nextTrack) {
@@ -167,29 +153,18 @@ export default defineComponent({
       }
     }
 
-    async function setAudioSrc(track) {
-      wasPlaying = playing.value;
-      audioRef.value.src = track.url;
-    }
-
     watch(ended, (newValue) => {
       if (newValue) {
-        emit('ended');
+        skipNext(true);
       }
     });
 
     watch(currentTrack, (newValue) => {
-      setAudioSrc(newValue);
-    });
-
-    watch(waiting, (newValue) => {
-      if (!newValue && wasPlaying) {
-        audioRef.value.play();
-      }
+      setAudioSrc(newValue.url);
     });
 
     onMounted(() => {
-      setAudioSrc(currentTrack.value);
+      setAudioSrc(currentTrack.value.url);
     });
 
     return {
@@ -200,9 +175,7 @@ export default defineComponent({
       currentTime, // Slider has to use currentTime as it also sets the value.
       durationSeconds,
       remainingSeconds,
-      waiting,
-      ended,
-      disabled,
+      busy,
 
       skipPrevious,
       replay10,

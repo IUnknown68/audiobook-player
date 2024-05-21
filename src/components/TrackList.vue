@@ -2,18 +2,17 @@
   <q-select
     :options="tracks"
     option-value="id"
+    option-label="title"
     emit-value
     map-options
     :modelValue="trackId"
+    behavior="dialog"
   >
     <template v-slot:option="scope">
       <TrackItem
         v-bind="scope.itemProps"
         :track="scope.opt"
       />
-    </template>
-    <template v-slot:selected-item="scope">
-      <div>{{scope.opt.title}}</div>
     </template>
   </q-select>
 </template>

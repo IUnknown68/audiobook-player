@@ -9,10 +9,7 @@
       <AudioPlayer
         :bookId="bookId"
         :trackId="trackId"
-        @ended="handleEnded"
       />
-
-      <!-- button "chapters" -->
 
       <TrackList
         :bookId="bookId"
@@ -21,7 +18,7 @@
         color="teal"
         label="Chapter"
         class="q-mt-md"
-        options-selected-class="text-deep-orange"
+        options-selected-class="text-primary"
       />
     </div>
   </q-page>
@@ -55,16 +52,10 @@ export default defineComponent({
       currentBook,
     } = useCurrentBookAndTrack();
 
-    function handleEnded() {
-      console.log('ENDED');
-    }
-
     return {
       bookId,
       trackId,
       currentBook,
-
-      handleEnded,
     };
   },
 });

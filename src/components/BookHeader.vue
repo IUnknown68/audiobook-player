@@ -8,7 +8,7 @@
         {{currentBook?.title}}
       </div>
       <div class="text-caption text-center">
-        {{currentTrack?.title || '-'}}
+        {{currentTrack.title}} ({{trackIndex + 1}}/{{trackCount}})
       </div>
     </div>
 
@@ -31,6 +31,7 @@
 <script>
 import {
   defineComponent,
+  computed,
 } from 'vue';
 
 import useBookAndTrackFromProps from 'lib/useBookAndTrackFromProps';
@@ -55,11 +56,16 @@ export default defineComponent({
     const {
       currentBook,
       currentTrack,
+      trackIndex,
     } = useBookAndTrackFromProps(props);
+
+    const trackCount = computed(() => currentBook.value.tracks.length);
 
     return {
       currentBook,
       currentTrack,
+      trackIndex,
+      trackCount,
     };
   },
 });
