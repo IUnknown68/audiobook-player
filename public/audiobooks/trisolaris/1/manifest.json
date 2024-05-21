@@ -1,9 +1,15 @@
 {
   "id": "24001577-ba57-4f4c-97b4-412f74895d4f",
-  "title": "Trisolaris: Die drei Sonnen (1/3)",
+  "title": "Die drei Sonnen (1/3)",
   "author": "Cixin Liu",
   "cover": "cover.jpg",
   "created": "2024-03-27T23:00:00.000Z",
+  "description": "Die Hörspiel-Serie nach den Science-Fiction-Bestsellern von Cixin Liu: \"Die drei Sonnen\", \"Der dunkle Wald\" und \"Jenseits der Zeit\". Welche Auswirkungen hätte das bevorstehende Eintreffen von Außerirdischen für unsere menschliche Zivilisation? In 32 Folgen inszeniert die Serie das potentielle Ende der Welt und führt die Menschheit in ihrem Überlebenskampf ins All.",
+  "copyright": "© WDR 2024",
+  "source": {
+    "url": "https://www.ardaudiothek.de/sendung/cixin-liu-trisolaris-trilogie-sci-fi-hoerspiel-serie-wdr/13220399",
+    "text": "Hörspiel beim WDR"
+  },
   "series": "95400e39-e355-4949-bf3f-b12dcaaae96e",
   "tracks": [
     {

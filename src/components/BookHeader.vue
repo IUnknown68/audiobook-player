@@ -1,19 +1,24 @@
 <template>
-  <div>
+  <div class="column items-center">
     <div class="text-subtitle1 text-center">
-      {{currentBook?.author}}
+      {{currentBook.author}}
     </div>
     <div class="text-h6 text-center">
-      {{currentBook?.title}}
+      {{currentBook.title}}
     </div>
-    <div class="text-caption text-center">
-      {{currentTrack.title}} ({{trackIndex + 1}}/{{trackCount}})
-    </div>
-
+    <SelectTrack
+      :bookId="bookId"
+      :trackId="trackId"
+      borderless
+      dense
+      hide-bottom-space
+      color="teal"
+      options-selected-class="text-primary"
+    />
     <q-img
       v-if="currentBook.cover"
       :src="currentBook.cover.href"
-      class="q-my-md"
+      class="q-mt-sm q-mb-md"
       fit="contain"
       style="height: 220px;"
     >
@@ -33,10 +38,15 @@ import {
 } from 'vue';
 
 import useBookAndTrackFromProps from 'lib/useBookAndTrackFromProps';
+import SelectTrack from 'components/SelectTrack.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
   name: 'BookHeader',
+
+  components: {
+    SelectTrack,
+  },
 
   props: {
     bookId: {

@@ -14,6 +14,22 @@ const { mergeConfig } = require('vite');
 const { configure } = require('quasar/wrappers');
 const path = require('path');
 
+// Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
+const devServer = (process.env.USE_SEIBERSPACE)
+  ? {
+    host: '0.0.0.0',
+    port: 3009,
+    hmr: {
+      host: '3009.intern.seiberspace.de',
+      clientPort: 443,
+      protocol: 'wss',
+    },
+    open: false,
+  }
+  : {
+    open: false,
+  };
+
 module.exports = configure((/* ctx */) => ({
   eslint: {
     fix: true,
@@ -98,17 +114,7 @@ module.exports = configure((/* ctx */) => ({
     ],
   },
 
-  // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
-  devServer: {
-    host: '0.0.0.0',
-    port: 3009,
-    hmr: {
-      host: '3009.intern.seiberspace.de',
-      clientPort: 443,
-      protocol: 'wss',
-    },
-    open: false,
-  },
+  devServer,
 
   // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
   framework: {

@@ -5,7 +5,7 @@
   >
     <q-item-section>
       <q-item-label>
-        {{track.title}}
+        {{index + 1}}. {{track.title}}
       </q-item-label>
       <q-item-label caption>
         <AudioDuration :length="track.length" />
@@ -36,6 +36,10 @@ export default defineComponent({
   props: {
     track: {
       type: Object,
+      required: true,
+    },
+    index: {
+      type: Number,
       required: true,
     },
   },

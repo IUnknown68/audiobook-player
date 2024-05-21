@@ -1,3 +1,11 @@
+At the moment there is one series hardcoded: "The Three-Body Problem".
+
+The actual audio is played from the ARD Audiothek, the meta data is included here
+in `public/audiobooks/`.
+
+
+
+
 # Quasar App (quasar-project)
 
 A Quasar Project

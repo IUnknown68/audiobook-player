@@ -11,7 +11,7 @@
     <q-toolbar-title
       class="title flex-auto position-relative"
     >
-      {{title}}
+      {{appTitle}}
     </q-toolbar-title>
 
     <q-space />
@@ -27,7 +27,7 @@
 
     <q-toggle
       v-model="darkmode"
-      color="secondary"
+      color="yellow"
     >
       <q-tooltip>{{$t('darkMode')}}</q-tooltip>
     </q-toggle>
@@ -51,6 +51,7 @@ import {
 } from '@vueuse/core';
 
 import { useMediaControls } from 'lib/useAudio';
+import useBooks from 'lib/useBooks';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
@@ -62,8 +63,11 @@ export default defineComponent({
     const darkmode = useLocalStorage('darkmode', false);
     const title = useTitle();
     const q = useQuasar();
-    const notAtHome = computed(() => (route.name !== 'home'));
+    const { getBook } = useBooks();
 
+    const appTitle = title.value;
+    const currentBook = computed(() => getBook(route.params.bookId));
+    const notAtHome = computed(() => (route.name !== 'home'));
     const {
       playing,
     } = useMediaControls();
@@ -77,11 +81,24 @@ export default defineComponent({
     }
 
     function navBack() {
-      router.back();
+      if (router.options.history.state.position > 1) {
+        router.back();
+      } else {
+        router.replace({ name: 'home' });
+      }
     }
+
+    watch(currentBook, (newBook) => {
+      if (newBook) {
+        title.value = `${newBook.title} - ${appTitle}`;
+      } else {
+        title.value = appTitle;
+      }
+    });
 
     return {
       darkmode,
+      appTitle,
       title,
       playing,
       notAtHome,

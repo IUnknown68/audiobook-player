@@ -2,7 +2,6 @@
   <q-select
     :options="tracks"
     option-value="id"
-    option-label="title"
     emit-value
     map-options
     :modelValue="trackId"
@@ -12,7 +11,13 @@
       <ListItemTrack
         v-bind="scope.itemProps"
         :track="scope.opt"
+        :index="scope.index"
       />
+    </template>
+    <template v-slot:selected-item="scope">
+      <div class="text-center text-caption">
+        {{scope.opt.title}} ({{trackIndex + 1}}/{{trackCount}})
+      </div>
     </template>
   </q-select>
 </template>
@@ -50,12 +55,16 @@ export default defineComponent({
   setup(props) {
     const {
       currentBook,
+      trackIndex,
     } = useBookAndTrackFromProps(props);
 
     const tracks = computed(() => (currentBook.value ? currentBook.value.tracks : []));
+    const trackCount = computed(() => currentBook.value.tracks.length);
 
     return {
       tracks,
+      trackIndex,
+      trackCount,
     };
   },
 });
