@@ -17,11 +17,10 @@
     <q-space />
 
     <q-btn
-      v-if="playing"
       dense
       flat
+      round
       icon="stop"
-      label="Stop"
       class="q-ml-md q-electron-drag--exception"
       @click="stop"
     />

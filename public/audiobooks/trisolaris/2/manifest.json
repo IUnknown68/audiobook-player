@@ -1,0 +1,58 @@
+{
+  "id": "b6c67019-7bb2-4462-ac99-be29ea5860b0",
+  "title": "Trisolaris: Der dunkle Wald (2/3)",
+  "author": "Cixin Liu",
+  "cover": "cover.jpg",
+  "created": "2024-03-27T23:00:00.000Z",
+  "series": "95400e39-e355-4949-bf3f-b12dcaaae96e",
+  "tracks": [
+    {
+      "id": "76b2308d-d151-4723-9229-1c5ad2581a6e",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094508/3094508_56749917.mp3",
+      "title": "Daten der Menschheit",
+      "length": "00:28:17"
+    },
+    {
+      "id": "f96c16ca-2f1c-4034-b490-59ab3f7e71f4",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094525/3094525_56750145.mp3",
+      "title": "Die Wandschauer",
+      "length": "00:27:05"
+    },
+    {
+      "id": "df84b523-0291-4ba5-be9d-e09c381323e5",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094530/3094530_56750172.mp3",
+      "title": "Die Wandbrecher",
+      "length": "00:29:09"
+    },
+    {
+      "id": "f83f1484-6d16-42be-8e83-62543ffe9e96",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094550/3094550_56750359.mp3",
+      "title": "Rückzug",
+      "length": "00:25:15"
+    },
+    {
+      "id": "c5fd2bd9-151b-40d4-b97a-17749757f04f",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094560/3094560_56750861.mp3",
+      "title": "Erwachen",
+      "length": "00:26:25"
+    },
+    {
+      "id": "be03b3c0-5f67-433c-89a0-2d92682b756b",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094566/3094566_56750890.mp3",
+      "title": "Der Tropfen",
+      "length": "00:26:23"
+    },
+    {
+      "id": "66494c36-a592-4bbc-8473-26d2bbc080a8",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094574/3094574_56750920.mp3",
+      "title": "Theorie des Universums",
+      "length": "00:23:47"
+    },
+    {
+      "id": "b6c52384-c38d-44bd-b6cf-722498b0a500",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/309/3094576/3094576_56750922.mp3",
+      "title": "Alles auf eine Karte",
+      "length": "00:27:27"
+    }
+  ]
+}
