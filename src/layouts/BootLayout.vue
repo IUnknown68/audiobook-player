@@ -5,7 +5,7 @@
         <q-banner v-if="app.error" class="text-white bg-red">
           {{message}}
           <template v-slot:action>
-            <q-btn flat color="white" :label="$t('tryAgain')" @click="boot" />
+            <q-btn flat color="white" label="Try again" @click="boot" />
           </template>
         </q-banner>
 

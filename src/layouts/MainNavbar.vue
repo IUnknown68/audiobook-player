@@ -22,14 +22,14 @@
       round
       icon="stop"
       class="q-ml-md q-electron-drag--exception"
-      @click="stop"
+      @click="pause"
     />
 
     <q-toggle
       v-model="darkmode"
       color="yellow"
     >
-      <q-tooltip>{{$t('darkMode')}}</q-tooltip>
+      <q-tooltip>Darkmode</q-tooltip>
     </q-toggle>
   </q-toolbar>
 </template>
@@ -70,15 +70,8 @@ export default defineComponent({
     const notAtHome = computed(() => (route.name !== 'home'));
     const {
       playing,
+      pause,
     } = useMediaControls();
-
-    watch(darkmode, () => {
-      q.dark.set(darkmode.value);
-    });
-
-    function stop() {
-      playing.value = false;
-    }
 
     function navBack() {
       if (router.options.history.state.position > 1) {
@@ -96,6 +89,10 @@ export default defineComponent({
       }
     });
 
+    watch(darkmode, () => {
+      q.dark.set(darkmode.value);
+    });
+
     return {
       darkmode,
       appTitle,
@@ -103,7 +100,7 @@ export default defineComponent({
       playing,
       notAtHome,
 
-      stop,
+      pause,
       navBack,
     };
   },

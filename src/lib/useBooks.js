@@ -2,6 +2,7 @@ import {
   reactive,
   computed,
 } from 'vue';
+import { useLocalStorage } from '@vueuse/core';
 import axios from 'axios';
 
 import {
@@ -50,6 +51,16 @@ async function loadBook(relUrl, force = false) {
 }
 
 //------------------------------------------------------------------------------
+function findTrack(book, timestamp) {
+  return book.tracks.find((track) => {
+    if ((track.start <= timestamp) && (track.start + track.length > timestamp)) {
+      return true;
+    }
+    return false;
+  });
+}
+
+//------------------------------------------------------------------------------
 function getBook(id) {
   return booksMap.get(id);
 }
@@ -88,11 +99,15 @@ function bookFromJson(data, bookUrl) {
   book.url = bookUrl;
   book.cover = new URL(book.cover, book.url);
 
+  book.lastRead = useLocalStorage(`book:${book.id}`, 0);
+
   if (book.series) {
     getSeries(book.series, true).books.push(book.id);
   }
 
-  book.tracks = book.tracks.map((trackData) => {
+  book.length = 0;
+  // Side effect: Calculate book.length.
+  book.tracks = book.tracks.map((trackData, index) => {
     const {
       id,
       url,
@@ -100,17 +115,20 @@ function bookFromJson(data, bookUrl) {
       ...trackDataRest
     } = trackData;
 
-    trackDataRest.url = new URL(url, book.url);
-    trackDataRest.length = parseLength(length);
-
     const track = getTrack(id, true);
+
+    trackDataRest.url = new URL(url, book.url);
+    trackDataRest.start = book.length;
+    trackDataRest.length = parseLength(length);
+    trackDataRest.index = index;
     Object.assign(track, trackDataRest);
+
+    book.length += track.length;
     return track;
   });
 
-  book.length = computed(() => book.tracks.reduce((p, c) => p + c.length, 0));
-
   book.getTrack = getBookTrack.bind(null, book);
+  book.findTrack = findTrack.bind(null, book);
 
   return book;
 }

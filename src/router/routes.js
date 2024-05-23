@@ -11,7 +11,7 @@ const routes = [
     component: MainLayout,
     children: [
       {
-        path: '/play/:bookId/:trackId?',
+        path: '/play/:bookId/:timestamp?',
         name: 'player',
         component: PlayerPage,
       },

@@ -18,9 +18,9 @@ const path = require('path');
 const devServer = (process.env.USE_SEIBERSPACE)
   ? {
     host: '0.0.0.0',
-    port: 3009,
+    port: 3019,
     hmr: {
-      host: '3009.intern.seiberspace.de',
+      host: '3019.intern.seiberspace.de',
       clientPort: 443,
       protocol: 'wss',
     },

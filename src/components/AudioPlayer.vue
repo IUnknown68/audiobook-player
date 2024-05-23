@@ -1,49 +1,38 @@
 <template>
-  <div class="position-relative">
-    <div class="q-mx-sm">
-      <q-slider
-        :min="0"
-        :max="durationSeconds - 1"
-        v-model="currentTime"
-      />
-    </div>
-    <div class="flex justify-between">
-      <AudioDuration :length="currentTimeSeconds" />
-      <AudioDuration :length="remainingSeconds" />
-    </div>
+  <div v-if="found" class="container-340">
+    <BookHeader
+      :book="currentBook"
+      :timestamp="currentTimestamp"
+    />
 
-    <div class="flex no-wrap justify-between items-center gap-md q-mb-md">
-      <q-btn
-        v-bind="allButtonProps"
-        icon="skip_previous"
-        @click="skipPrevious"
-      />
-      <q-btn
-        v-bind="allButtonProps"
-        icon="replay_10"
-        @click="replay10"
-      />
-      <q-btn
-        round
-        unelevated
-        color="primary"
-        size="lg"
-        :loading="busy"
-        :icon="currentPlayIcon"
-        @click="togglePlay"
-      />
-      <q-btn
-        v-bind="allButtonProps"
-        icon="forward_10"
-        @click="forward10"
-      />
-      <q-btn
-        v-bind="allButtonProps"
-        icon="skip_next"
-        @click="skipNext"
-      />
-    </div>
+    <PlayerControls
+      :book="currentBook"
+      :timestamp="currentTimestamp"
+      @seek="handleSeek"
+      @ended="handleEnded"
+      @paused="handlePaused"
+      @pause="handlePause"
+      @play="handlePlay"
+    />
+
+    <BookFooter
+      :book="currentBook"
+    />
   </div>
+
+  <q-banner v-else-if="currentBook" class="text-white bg-red container-340">
+    <template v-slot:avatar>
+      <q-icon name="subtitles_off" color="white" />
+    </template>
+    Track not found.
+  </q-banner>
+
+  <q-banner v-else class="text-white bg-red container-340">
+    <template v-slot:avatar>
+      <q-icon name="tv_off" />
+    </template>
+    Book not found
+  </q-banner>
 </template>
 
 <script>
@@ -53,121 +42,94 @@ import {
   watch,
 } from 'vue';
 import {
+  useRoute,
   useRouter,
 } from 'vue-router';
 
-import AudioDuration from 'components/AudioDuration.vue';
-
-import useBookAndTrackFromProps from 'lib/useBookAndTrackFromProps';
+import useBooks from 'lib/useBooks';
 import { useMediaControls } from 'lib/useAudio';
 
-// Number of seconds that has to have passed to jump to beginning of
-// chapter instead of previous chapter:
-const MIN_TIME_IN_CHAPTER = 1;
+import PlayerControls from 'components/PlayerControls.vue';
+import BookHeader from 'components/BookHeader.vue';
+import BookFooter from 'components/BookFooter.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
   name: 'AudioPlayer',
 
   components: {
-    AudioDuration,
+    PlayerControls,
+    BookHeader,
+    BookFooter,
   },
 
-  props: {
-    bookId: {
-      type: String,
-      default: '',
-    },
-
-    trackId: {
-      type: String,
-      default: '',
-    },
-  },
-
-  setup(props) {
+  setup() {
+    const { getBook } = useBooks();
+    const route = useRoute();
     const router = useRouter();
-
     const {
-      playing,
-      seeking,
-      currentTime,
-      duration,
-      waiting,
-      ended,
-
-      replay10,
-      forward10,
-      togglePlay,
-      // setAudioSrc,
+      play,
+      pause,
     } = useMediaControls();
 
-    const {
-      bookId,
-      currentBook,
-      trackIndex,
-    } = useBookAndTrackFromProps(props);
+    const currentBook = computed(() => getBook(route.params.bookId));
+    const currentTimestamp = computed(() => parseInt(route.params.timestamp, 10) || 0);
+    const currentTrack = computed(() => currentBook.value?.findTrack(currentTimestamp.value));
 
-    const busy = computed(() => (waiting.value || seeking.value));
+    const found = computed(() => currentBook.value && currentTrack.value);
 
-    const durationSeconds = computed(() => Math.ceil(duration.value));
-    const currentTimeSeconds = computed(() => Math.floor(currentTime.value));
-
-    const currentPlayIcon = computed(() => (playing.value ? 'pause' : 'play_arrow'));
-    const remainingSeconds = computed(() => durationSeconds.value - currentTimeSeconds.value);
-
-    const allButtonProps = {
-      round: true,
-      outline: true,
-      color: 'primary',
-    };
-
-    function navigateTrack(track) {
-      if (!track) {
-        return;
-      }
+    function navigateTimestamp(newPosition) {
+      const timestamp = Math.floor(newPosition);
       router.replace({
         name: 'player',
         params: {
-          bookId: bookId.value,
-          trackId: track.id,
+          bookId: currentBook.value.id,
+          timestamp,
         },
       });
     }
 
-    function skipPrevious() {
-      if (currentTime.value > MIN_TIME_IN_CHAPTER) {
-        currentTime.value = 0;
+    function handleSeek(newPosition) {
+      navigateTimestamp(newPosition);
+    }
+
+    function handlePaused(newPosition) {
+      navigateTimestamp(newPosition);
+    }
+
+    function handleEnded(newPosition) {
+      if (newPosition < currentBook.value.length) {
+        navigateTimestamp(newPosition);
       } else {
-        navigateTrack(currentBook.value.tracks[trackIndex.value - 1]);
+        pause();
+        navigateTimestamp(0);
       }
     }
 
-    function skipNext() {
-      navigateTrack(currentBook.value.tracks[trackIndex.value + 1]);
+    function handlePlay() {
+      play();
     }
 
-    watch(ended, (hasEnded) => {
-      if (hasEnded) {
-        skipNext();
+    function handlePause() {
+      pause();
+    }
+
+    watch(route, () => {
+      if (currentBook.value) {
+        currentBook.value.lastRead = currentTimestamp.value;
       }
     });
 
     return {
-      allButtonProps,
+      currentBook,
+      currentTimestamp,
+      found,
 
-      currentPlayIcon,
-      currentTimeSeconds,
-      currentTime, // Slider has to use currentTime as it also sets the value.
-      durationSeconds,
-      remainingSeconds,
-      busy,
-
-      skipPrevious,
-      replay10,
-      togglePlay,
-      forward10,
-      skipNext,
+      handleSeek,
+      handlePaused,
+      handleEnded,
+      handlePlay,
+      handlePause,
     };
   },
 });

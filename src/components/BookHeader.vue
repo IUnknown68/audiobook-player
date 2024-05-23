@@ -1,14 +1,14 @@
 <template>
   <div class="column items-center">
     <div class="text-subtitle1 text-center">
-      {{currentBook.author}}
+      {{book.author}}
     </div>
     <div class="text-h6 text-center">
-      {{currentBook.title}}
+      {{book.title}}
     </div>
-    <SelectTrack
-      :bookId="bookId"
-      :trackId="trackId"
+    <TrackSelect
+      :book="book"
+      :timestamp="timestamp"
       borderless
       dense
       hide-bottom-space
@@ -16,8 +16,8 @@
       options-selected-class="text-primary"
     />
     <q-img
-      v-if="currentBook.cover"
-      :src="currentBook.cover.href"
+      v-if="book.cover"
+      :src="book.cover.href"
       class="q-mt-sm q-mb-md"
       fit="contain"
       style="height: 220px;"
@@ -34,47 +34,28 @@
 <script>
 import {
   defineComponent,
-  computed,
 } from 'vue';
 
-import useBookAndTrackFromProps from 'lib/useBookAndTrackFromProps';
-import SelectTrack from 'components/SelectTrack.vue';
+import TrackSelect from 'components/TrackSelect.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
   name: 'BookHeader',
 
   components: {
-    SelectTrack,
+    TrackSelect,
   },
 
   props: {
-    bookId: {
-      type: String,
-      default: '',
+    book: {
+      type: Object,
+      required: true,
     },
 
-    trackId: {
-      type: String,
-      default: '',
+    timestamp: {
+      type: Number,
+      default: 0,
     },
-  },
-
-  setup(props) {
-    const {
-      currentBook,
-      currentTrack,
-      trackIndex,
-    } = useBookAndTrackFromProps(props);
-
-    const trackCount = computed(() => currentBook.value.tracks.length);
-
-    return {
-      currentBook,
-      currentTrack,
-      trackIndex,
-      trackCount,
-    };
   },
 });
 </script>

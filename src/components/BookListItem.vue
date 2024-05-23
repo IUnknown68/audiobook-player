@@ -25,7 +25,7 @@
     <div class="q-pb-md q-pt-sm q-pl-lg">
       {{book.description}}
       <BookFooter
-        :bookId="book.id"
+        :book="book"
         class="q-mt-sm"
       />
     </div>
@@ -43,7 +43,7 @@ import BookFooter from 'components/BookFooter.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
-  name: 'ListItemBook',
+  name: 'BookListItem',
 
   components: {
     AudioDuration,
@@ -62,7 +62,7 @@ export default defineComponent({
       name: 'player',
       params: {
         bookId: props.book.id,
-        trackId: '',
+        timestamp: props.book.lastRead,
       },
     }));
 

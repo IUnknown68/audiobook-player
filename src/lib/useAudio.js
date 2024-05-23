@@ -7,13 +7,15 @@ import { useMediaControls as umc } from '@vueuse/core';
 const audioRef = ref();
 const mediaControls = umc(audioRef);
 
+const audioSource = ref('');
+
 const {
-  currentTime,
-  duration,
   waiting,
   playing,
 } = mediaControls;
 
+// Captures the requested play state as opposed to the
+// actual. Used to continue playing once a track ended.
 let shouldBePlaying = false;
 
 //------------------------------------------------------------------------------
@@ -26,18 +28,12 @@ export function useMediaControls() {
   return {
     ...mediaControls,
     audioRef,
+    audioSource,
 
-    replay10,
-    forward10,
     play,
+    pause,
     togglePlay,
-    setAudioSrc,
   };
-}
-
-//------------------------------------------------------------------------------
-function replay10() {
-  currentTime.value = Math.max(0, currentTime.value - 10);
 }
 
 //------------------------------------------------------------------------------
@@ -59,26 +55,34 @@ function play() {
   if (!audioRef.value) {
     return;
   }
+  shouldBePlaying = true;
   audioRef.value.play();
 }
 
 //------------------------------------------------------------------------------
-function forward10() {
-  currentTime.value = Math.min(duration.value, currentTime.value + 10);
-}
-
-//------------------------------------------------------------------------------
-function setAudioSrc(url) {
+function pause() {
   if (!audioRef.value) {
     return;
   }
-  audioRef.value.src = url;
+  shouldBePlaying = false;
+  audioRef.value.pause();
 }
 
 watch(waiting, (isWaiting) => {
   if (!isWaiting && shouldBePlaying && audioRef.value) {
     audioRef.value.play();
   }
+});
+
+watch(audioSource, (newSource) => {
+  if (!audioRef.value) {
+    return;
+  }
+  const href = (typeof newSource === 'object')
+    ? newSource.href
+    : newSource;
+  //console.log('SET AUDIO', href);
+  audioRef.value.src = href;
 });
 
 //------------------------------------------------------------------------------

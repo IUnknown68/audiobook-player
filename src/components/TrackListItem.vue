@@ -27,7 +27,7 @@ import AudioDuration from 'components/AudioDuration.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
-  name: 'ListItemTrack',
+  name: 'TrackListItem',
 
   components: {
     AudioDuration,
@@ -50,7 +50,7 @@ export default defineComponent({
       ...route.value,
       params: {
         ...route.params,
-        trackId: props.track.id,
+        timestamp: props.track.start,
       },
     }));
 

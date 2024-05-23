@@ -3,7 +3,7 @@
     <div class="container-340">
       <div class="text-h5 text-center q-my-md">My Books</div>
       <q-list separator>
-        <ListItemBook
+        <BookListItem
           v-for="book of books"
           :key="book.id"
           :book="book"
@@ -20,14 +20,14 @@ import {
 
 import useBooks from 'lib/useBooks';
 
-import ListItemBook from 'components/ListItemBook.vue';
+import BookListItem from 'components/BookListItem.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
   name: 'IndexPage',
 
   components: {
-    ListItemBook,
+    BookListItem,
   },
 
   setup() {
