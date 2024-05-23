@@ -198,10 +198,10 @@ export default defineComponent({
 
       handleSliderRelease,
       handleSkipPrevious,
-      handleReplay10,
-      handleTogglePlay,
-      handleForward10,
       handleSkipNext,
+      handleReplay10,
+      handleForward10,
+      handleTogglePlay,
     };
   },
 });
