@@ -24,14 +24,14 @@
     <template v-slot:avatar>
       <q-icon name="subtitles_off" color="white" />
     </template>
-    Track not found.
+    $t('trackNotFound')
   </q-banner>
 
   <q-banner v-else class="text-white bg-red container-340">
     <template v-slot:avatar>
       <q-icon name="tv_off" />
     </template>
-    Book not found
+    $t('bookNotFound')
   </q-banner>
 </template>
 
@@ -46,7 +46,7 @@ import {
   useRouter,
 } from 'vue-router';
 
-import useBooks from 'lib/useBooks';
+import { useCurrentBook } from 'lib/useBooks';
 import { useMediaControls } from 'lib/useAudio';
 
 import PlayerControls from 'components/PlayerControls.vue';
@@ -64,7 +64,6 @@ export default defineComponent({
   },
 
   setup() {
-    const { getBook } = useBooks();
     const route = useRoute();
     const router = useRouter();
     const {
@@ -72,7 +71,7 @@ export default defineComponent({
       pause,
     } = useMediaControls();
 
-    const currentBook = computed(() => getBook(route.params.bookId));
+    const currentBook = useCurrentBook();
     const currentTimestamp = computed(() => parseInt(route.params.timestamp, 10) || 0);
     const currentTrack = computed(() => currentBook.value?.findTrack(currentTimestamp.value));
 

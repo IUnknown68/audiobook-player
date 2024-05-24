@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR lFr">
-    <q-header>
+    <q-header class="main-navbar">
       <MainNavbar />
     </q-header>
     <q-page-container>

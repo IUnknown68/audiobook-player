@@ -12,9 +12,10 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #d24d19;
+// Keep in sync with PRIMARY_DEFAULT in app.vue
+$primary   : #54830f;
 $secondary : #9fb207;
-$accent    : #9C27B0;
+$accent    : #36a5ca;
 
 $dark      : #1D1D1D;
 $dark-page : #121212;

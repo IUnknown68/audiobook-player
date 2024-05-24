@@ -1,9 +1,9 @@
 {
-  "name": "quasar-project",
-  "version": "0.1.0",
-  "description": "A Quasar Project",
+  "name": "audiobook-player",
+  "version": "0.1.1",
+  "description": "A simple Audiobook player.",
   "productName": "Audiobooks",
-  "author": "Arne Seib <iunknown@seiberspace.de>",
+  "author": "Arne Seib <arne42@seiberspace.de>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",

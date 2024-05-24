@@ -1,7 +1,9 @@
 <template>
   <q-page class="flex justify-center">
     <div class="container-340">
-      <div class="text-h5 text-center q-my-md">My Books</div>
+      <div class="text-h5 text-center q-my-md">
+        {{$t('myBooks')}}
+      </div>
       <q-list separator>
         <BookListItem
           v-for="book of books"

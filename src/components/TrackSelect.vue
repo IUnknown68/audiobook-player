@@ -15,7 +15,7 @@
       />
     </template>
     <template v-slot:selected-item="scope">
-      <div class="text-center text-caption">
+      <div class="text-center text-subtitle1">
         {{scope.opt.title}} ({{currentTrack.index + 1}}/{{book.tracks.length}})
       </div>
     </template>

@@ -5,7 +5,11 @@
     </div>
     <q-space />
     <div class="">
-      <a :href="book.source.url" target="blank">{{book.source.text}}</a>
+      <a
+        :href="book.source.url"
+        class="link"
+        target="_blank"
+      >{{book.source.text}}</a>
     </div>
   </div>
 </template>

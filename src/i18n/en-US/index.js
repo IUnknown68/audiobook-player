@@ -1,9 +1,12 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful',
+  appTitle: 'Audiobooks',
   darkMode: 'Dark Mode',
   tryAgain: 'Try again',
+  myBooks: 'My Books',
+  notFound: 'Oops. Nothing here...',
+  goHome: 'Home',
+  loadingData: 'Loading app...',
+  chapters: 'Chapters',
+  trackNotFound: 'Track not found.',
+  bookNotFound: 'Book not found.',
 };

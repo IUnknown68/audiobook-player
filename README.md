@@ -1,14 +1,10 @@
-At the moment there is one series hardcoded: "The Three-Body Problem".
+# Audiobooks
 
-The actual audio is played from the ARD Audiothek, the meta data is included here
-in `public/audiobooks/`.
+A simple Audiobook player.
 
+At the moment there are just some hardcoded books.
 
-
-
-# Quasar App (quasar-project)
-
-A Quasar Project
+The actual audio is played from the ARD Audiothek, the meta data is included in the sources in `public/audiobooks/` to avoid adding a backend.
 
 ## Install the dependencies
 ```bash
@@ -19,9 +15,8 @@ npm install
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
+yarn dev
 ```
-
 
 ### Lint the files
 ```bash
@@ -30,11 +25,9 @@ yarn lint
 npm run lint
 ```
 
-
-
 ### Build the app for production
 ```bash
-quasar build
+yarn build
 ```
 
 ### Customize the configuration

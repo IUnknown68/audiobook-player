@@ -7,14 +7,31 @@
 <script>
 import {
   defineComponent,
+  watch,
+  onMounted,
 } from 'vue';
-import { useQuasar } from 'quasar';
+import {
+  useQuasar,
+  setCssVar,
+} from 'quasar';
 import { useLocalStorage } from '@vueuse/core';
 
 import useReactive from 'lib/useReactive';
 import BootLayout from 'layouts/BootLayout.vue';
-import useBooks from 'lib/useBooks';
+import useBooks, {
+  useCurrentBook,
+} from 'lib/useBooks';
 import useAudio from 'lib/useAudio';
+
+const PRIMARY_DEFAULT = '#54830f';
+
+const BOOKS_TO_LOAD = [
+  'trisolaris/1',
+  'trisolaris/2',
+  'trisolaris/3',
+  'das_schloss',
+  'frankenstein',
+];
 
 const APP_DEFAULTS = {
   loaded: false,
@@ -24,9 +41,12 @@ const APP_DEFAULTS = {
     // eslint-disable-next-line no-console
     console.log('Loading books...');
 
-    await loadBook('trisolaris/1');
-    await loadBook('trisolaris/2');
-    await loadBook('trisolaris/3');
+    //await Promise.all(BOOKS_TO_LOAD.map((book) => loadBook(book)));
+    // Want to keep the sort order:
+    for (const book of BOOKS_TO_LOAD) {
+      // eslint-disable-next-line no-await-in-loop
+      await loadBook(book);
+    }
 
     // eslint-disable-next-line no-console
     console.log('OK.');
@@ -45,6 +65,16 @@ export default defineComponent({
     const audio = useAudio();
     const app = useReactive('app', APP_DEFAULTS);
     const darkmode = useLocalStorage('darkmode', false);
+
+    const currentBook = useCurrentBook();
+
+    function setBookColor() {
+      setCssVar('primary', currentBook.value?.color || PRIMARY_DEFAULT);
+    }
+
+    watch(currentBook, setBookColor);
+    onMounted(setBookColor);
+
     useQuasar().dark.set(darkmode.value);
 
     return {

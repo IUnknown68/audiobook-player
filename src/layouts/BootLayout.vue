@@ -5,7 +5,12 @@
         <q-banner v-if="app.error" class="text-white bg-red">
           {{message}}
           <template v-slot:action>
-            <q-btn flat color="white" label="Try again" @click="boot" />
+            <q-btn
+              flat
+              color="white"
+              label="$t('tryAgain')"
+              @click="boot"
+            />
           </template>
         </q-banner>
 
@@ -29,6 +34,7 @@ import {
   computed,
   onMounted,
 } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import useReactive from 'src/lib/useReactive';
 
@@ -38,8 +44,9 @@ export default defineComponent({
 
   setup() {
     const app = useReactive('app');
+    const { t } = useI18n();
     const message = computed(() => (
-      app.error ? app.error.message : 'Loading data...'));
+      app.error ? app.error.message : t('loadingData')));
 
     async function boot() {
       try {

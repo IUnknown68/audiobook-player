@@ -2,6 +2,7 @@ import {
   reactive,
   computed,
 } from 'vue';
+import { useRoute } from 'vue-router';
 import { useLocalStorage } from '@vueuse/core';
 import axios from 'axios';
 
@@ -31,6 +32,12 @@ function useBooks() {
     getTrack: getBookTrack,
     loadBook,
   };
+}
+
+//------------------------------------------------------------------------------
+export function useCurrentBook() {
+  const route = useRoute();
+  return computed(() => getBook(route.params.bookId));
 }
 
 //------------------------------------------------------------------------------

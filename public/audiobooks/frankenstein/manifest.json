@@ -1,0 +1,124 @@
+{
+  "id": "63b82747-624b-4c87-ab9d-a5a4d382769c",
+  "title": "Frankenstein",
+  "cover": "cover.jpg",
+  "created": "2022-12-31T23:00:00.000Z",
+  "author": "Mary Shelley",
+  "description": "Es ist wohl der berühmteste Schauer-Roman der Literaturgeschichte: Mary Shelleys Geschichte des Naturwissenschaftlers Viktor Frankenstein, der aus Leichenteilen einen künstlichen Menschen erschafft. Ein Klassiker, gelesen von Regina Münch",
+  "copyright": "© WDR 2024",
+  "color": "#345a7e",
+  "source": {
+    "url": "https://www.ardaudiothek.de/sendung/wdr-5-frankenstein-hoerbuch/12180857/",
+    "text": "Hörspiel beim WDR"
+  },
+  "tracks": [
+    {
+      "id": "fbac487e-7ee8-493e-9819-c1a91ed34ae5",
+      "length": 1328,
+      "title": "Folge 1",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845358/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge1_wdr5.mp3"
+    },
+    {
+      "id": "fe779a52-3520-44e8-8b82-b5575d3a1e1a",
+      "length": 1831,
+      "title": "Folge 2",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845365/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge2_wdr5.mp3"
+    },
+    {
+      "id": "8bde2072-77c7-46d7-8736-d8b4aeb2a6f9",
+      "length": 1870,
+      "title": "Folge 3",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845367/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge3_wdr5.mp3"
+    },
+    {
+      "id": "941b79a0-a542-4168-801a-bd84a6eb7d84",
+      "length": 1912,
+      "title": "Folge 4",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845370/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge4_wdr5.mp3"
+    },
+    {
+      "id": "b85328a9-94b1-44d9-bac8-d4c48ee2ac7d",
+      "length": 2487,
+      "title": "Folge 5",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845393/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge5_wdr5.mp3"
+    },
+    {
+      "id": "acb6f0f4-8b47-48db-bcde-e0f9c2d6d08c",
+      "length": 2085,
+      "title": "Folge 6",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845395/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge6_wdr5.mp3"
+    },
+    {
+      "id": "6e13cccc-8a72-44a5-b713-e2f3c23e2966",
+      "length": 2060,
+      "title": "Folge 7",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845397/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge7_wdr5.mp3"
+    },
+    {
+      "id": "c1be4f6a-b2a7-4e5f-9c99-8ffb3b18dfe1",
+      "length": 1664,
+      "title": "Folge 8",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845399/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge8_wdr5.mp3"
+    },
+    {
+      "id": "37c6d9f0-e747-4648-be56-4d66db01938c",
+      "length": 1694,
+      "title": "Folge 9",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845400/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge9_wdr5.mp3"
+    },
+    {
+      "id": "6debe708-dcef-4571-83ad-963f68917ba7",
+      "length": 2180,
+      "title": "Folge 10",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845401/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge10_wdr5.mp3"
+    },
+    {
+      "id": "5963dca3-1a15-42a1-9552-07d208c419b8",
+      "length": 1400,
+      "title": "Folge 11",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845403/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge11_wdr5.mp3"
+    },
+    {
+      "id": "969ba948-3b10-4f28-ae64-73411576adff",
+      "length": 1442,
+      "title": "Folge 12",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845404/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge12_wdr5.mp3"
+    },
+    {
+      "id": "bd50f605-1e88-405a-a6fa-26bd42cd0f41",
+      "length": 1359,
+      "title": "Folge 13",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845407/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge13_wdr5.mp3"
+    },
+    {
+      "id": "ecd4f81b-bec1-4b50-bfd0-4ec435818234",
+      "length": 2278,
+      "title": "Folge 14",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845411/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge14_wdr5.mp3"
+    },
+    {
+      "id": "59f0601a-0175-4355-ad2d-7eb999df0da5",
+      "length": 1540,
+      "title": "Folge 15",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845410/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge15_wdr5.mp3"
+    },
+    {
+      "id": "ada5a928-6f24-4967-a062-daaf75d89252",
+      "length": 1680,
+      "title": "Folge 16",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845419/wdr5frankensteinhoerbuch_2022-12-31_frankensteinfolge16_wdr5.mp3"
+    },
+    {
+      "id": "37b07d96-b429-4996-9682-965cfcc5a9cc",
+      "length": 892,
+      "title": "Talk 1",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845425/wdr5frankensteinhoerbuch_2022-12-31_frankensteintalk1_wdr5.mp3"
+    },
+    {
+      "id": "038f332c-cd9d-41cd-bbaf-6b7d8fde6e7c",
+      "length": 966,
+      "title": "Talk 2",
+      "url": "https://wdrmedien-a.akamaihd.net/medp/podcast/weltweit/fsk0/284/2845428/wdr5frankensteinhoerbuch_2022-12-31_frankensteintalk2_wdr5.mp3"
+    }
+  ]
+}

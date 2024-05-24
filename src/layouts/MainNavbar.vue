@@ -8,28 +8,26 @@
       icon="arrow_back"
       @click="navBack"
     />
-    <q-toolbar-title
-      class="title flex-auto position-relative"
-    >
-      {{appTitle}}
+    <q-toolbar-title>
+      {{$t('appTitle')}}
     </q-toolbar-title>
-
-    <q-space />
 
     <q-btn
       dense
       flat
       round
-      icon="stop"
-      class="q-ml-md q-electron-drag--exception"
+      icon="pause"
+      class="q-mx-md q-electron-drag--exception"
       @click="pause"
     />
+
+    <SelectLocale />
 
     <q-toggle
       v-model="darkmode"
       color="yellow"
     >
-      <q-tooltip>Darkmode</q-tooltip>
+      <q-tooltip>{{$t('darkMode')}}</q-tooltip>
     </q-toggle>
   </q-toolbar>
 </template>
@@ -49,24 +47,31 @@ import {
   useTitle,
   useLocalStorage,
 } from '@vueuse/core';
+import { useI18n } from 'vue-i18n';
 
 import { useMediaControls } from 'lib/useAudio';
-import useBooks from 'lib/useBooks';
+import { useCurrentBook } from 'lib/useBooks';
+import SelectLocale from 'components/SelectLocale.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
   name: 'MainNavbar',
 
+  components: {
+    SelectLocale,
+  },
+
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const { t } = useI18n();
     const darkmode = useLocalStorage('darkmode', false);
     const title = useTitle();
     const q = useQuasar();
-    const { getBook } = useBooks();
+    const currentBook = useCurrentBook();
 
-    const appTitle = title.value;
-    const currentBook = computed(() => getBook(route.params.bookId));
+    // eslint-disable-next-line no-multi-assign
+    const appTitle = title.value = t('appTitle');
     const notAtHome = computed(() => (route.name !== 'home'));
     const {
       playing,

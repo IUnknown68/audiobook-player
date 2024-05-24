@@ -19,3 +19,45 @@
   width: 340px;
   max-width: 100%;
 }
+
+.body--dark {
+  a.link,
+  a.link:hover,
+  a.link:active,
+  a.link:visited {
+    color: lighten($accent, 10);
+  }
+  a.link:hover {
+    color: lighten($accent, 30);
+  }
+}
+
+.body--light {
+  a.link,
+  a.link:hover,
+  a.link:active,
+  a.link:visited {
+    color: darken($accent, 10);
+  }
+  a.link:hover {
+    color: darken($accent, 30);
+  }
+}
+
+a.link.link-external,
+a.link[target="_blank"] {
+  &:after {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    line-height: 1em;
+    margin-left: 4px;
+    transform: translateY(3px);
+    content: "open_in_new";
+  }
+}
+
+.main-navbar {
+  transition: background-color 1s ease-out;
+}

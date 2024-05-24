@@ -3,7 +3,7 @@
     <div class="text-subtitle1 text-center">
       {{book.author}}
     </div>
-    <div class="text-h6 text-center">
+    <div class="text-h5 text-center">
       {{book.title}}
     </div>
     <TrackSelect

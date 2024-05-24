@@ -18,7 +18,7 @@
           {{book.title}}
         </q-item-label>
         <q-item-label caption>
-          {{book.tracks.length}} Chapters, <AudioDuration :length="book.length" />
+          {{book.tracks.length}} {{$t('chapters')}}, <AudioDuration :length="book.length" />
         </q-item-label>
       </q-item-section>
     </template>
