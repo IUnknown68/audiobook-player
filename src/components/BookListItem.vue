@@ -62,7 +62,7 @@ export default defineComponent({
       name: 'player',
       params: {
         bookId: props.book.id,
-        timestamp: props.book.lastRead,
+        timestamp: props.book.bookmarks.lastRead.ts,
       },
     }));
 

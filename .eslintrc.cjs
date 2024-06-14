@@ -58,6 +58,7 @@ module.exports = {
 
     'no-param-reassign': 'off',
     'no-void': 'off',
+    'no-plusplus': 'off',
     'no-nested-ternary': 'off',
     'no-unused-vars': 'warn',
     'no-restricted-syntax': 'off',

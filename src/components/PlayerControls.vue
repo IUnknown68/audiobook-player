@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative">
-    <div class="q-mx-sm">
+    <div class="q-mx-sm row gap-xs">
       <q-slider
         :min="0"
         :max="durationSeconds - 1"
@@ -13,7 +13,7 @@
       <AudioDuration :length="remainingSeconds" />
     </div>
 
-    <div class="flex no-wrap justify-between items-center gap-md q-mb-md">
+    <div class="flex no-wrap justify-between items-center gap-md">
       <q-btn
         v-bind="allButtonProps"
         icon="skip_previous"

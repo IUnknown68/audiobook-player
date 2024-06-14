@@ -79,6 +79,7 @@ export function useRouterSelect(paramName) {
 
     () => {
       if (isActive(paramName, route)) {
+        // Bug: Cancels navigation by BookListItem
         router.back();
       }
     },

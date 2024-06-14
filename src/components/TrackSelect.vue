@@ -1,14 +1,11 @@
 <template>
   <q-select
-    ref="select"
     :options="book.tracks"
     :modelValue="currentTrack.id"
     option-value="id"
     emit-value
     map-options
     behavior="dialog"
-    @click="handleClick"
-    @popup-hide="handlePopupHide"
   >
     <template v-slot:option="scope">
       <TrackListItem
@@ -31,7 +28,7 @@ import {
   computed,
 } from 'vue';
 
-import { useRouterSelect } from 'lib/useRouterPopup.js';
+// import { useRouterSelect } from 'lib/useRouterPopup.js';
 import TrackListItem from 'components/TrackListItem.vue';
 
 //------------------------------------------------------------------------------
@@ -59,18 +56,19 @@ export default defineComponent({
       () => props.book.findTrack(props.timestamp),
     );
 
-    const [
-      select,
-      handleClick,
-      handlePopupHide,
-    ] = useRouterSelect('tracksel');
+    // Buggy, See useRouterPopup/useRouterSelect
+    // const [
+    //   select,
+    //   handleClick,
+    //   handlePopupHide,
+    // ] = useRouterSelect('tracksel');
 
     return {
-      select,
+      // select,
       currentTrack,
 
-      handleClick,
-      handlePopupHide,
+      // handleClick,
+      // handlePopupHide,
     };
   },
 });

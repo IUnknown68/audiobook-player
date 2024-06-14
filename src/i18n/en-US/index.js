@@ -9,4 +9,7 @@ export default {
   chapters: 'Chapters',
   trackNotFound: 'Track not found.',
   bookNotFound: 'Book not found.',
+  addBookmark: 'Add Bookmark',
+  lastRead: 'Last position',
+  furthestRead: 'Furthest position',
 };

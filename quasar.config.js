@@ -67,6 +67,7 @@ module.exports = configure((/* ctx */) => ({
 
     'roboto-font', // optional, you are not bound to it
     'material-icons', // optional, you are not bound to it
+    'material-symbols-outlined',
   ],
 
   // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
@@ -176,7 +177,7 @@ module.exports = configure((/* ctx */) => ({
 
   // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa
   pwa: {
-    workboxMode: 'generateSW', // or 'injectManifest'
+    workboxMode: 'injectManifest', // or 'generateSW'
     injectPwaMetaTags: true,
     swFilename: 'sw.js',
     manifestFilename: 'manifest.json',

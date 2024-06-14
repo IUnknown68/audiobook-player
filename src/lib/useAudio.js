@@ -11,12 +11,19 @@ const audioSource = ref('');
 
 const {
   waiting,
-  playing,
 } = mediaControls;
 
 // Captures the requested play state as opposed to the
 // actual. Used to continue playing once a track ended.
-let shouldBePlaying = false;
+const shouldBePlaying = ref(false);
+
+watch(shouldBePlaying, () => {
+  if (shouldBePlaying.value) {
+    audioRef.value.play();
+  } else {
+    audioRef.value.pause();
+  }
+});
 
 //------------------------------------------------------------------------------
 function useAudio() {
@@ -29,6 +36,7 @@ export function useMediaControls() {
     ...mediaControls,
     audioRef,
     audioSource,
+    shouldBePlaying,
 
     play,
     pause,
@@ -41,13 +49,7 @@ function togglePlay() {
   if (!audioRef.value) {
     return;
   }
-  if (playing.value) {
-    shouldBePlaying = false;
-    audioRef.value.pause();
-  } else {
-    shouldBePlaying = true;
-    audioRef.value.play();
-  }
+  shouldBePlaying.value = !shouldBePlaying.value;
 }
 
 //------------------------------------------------------------------------------
@@ -55,8 +57,7 @@ function play() {
   if (!audioRef.value) {
     return;
   }
-  shouldBePlaying = true;
-  audioRef.value.play();
+  shouldBePlaying.value = true;
 }
 
 //------------------------------------------------------------------------------
@@ -64,12 +65,11 @@ function pause() {
   if (!audioRef.value) {
     return;
   }
-  shouldBePlaying = false;
-  audioRef.value.pause();
+  shouldBePlaying.value = false;
 }
 
 watch(waiting, (isWaiting) => {
-  if (!isWaiting && shouldBePlaying && audioRef.value) {
+  if (!isWaiting && shouldBePlaying.value && audioRef.value) {
     audioRef.value.play();
   }
 });

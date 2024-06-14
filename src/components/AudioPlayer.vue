@@ -8,30 +8,35 @@
     <PlayerControls
       :book="currentBook"
       :timestamp="currentTimestamp"
+      class="q-mb-xs"
       @seek="handleSeek"
       @ended="handleEnded"
       @paused="handlePaused"
       @pause="handlePause"
       @play="handlePlay"
     />
-
-    <BookFooter
-      :book="currentBook"
-    />
+    <div class="flex no-wrap justify-end items-center gap-md q-mb-md">
+      <BookmarkList
+        flat
+        round
+        color="primary"
+        icon="bookmarks"
+      />
+    </div>
   </div>
 
   <q-banner v-else-if="currentBook" class="text-white bg-red container-340">
     <template v-slot:avatar>
       <q-icon name="subtitles_off" color="white" />
     </template>
-    $t('trackNotFound')
+    {{$t('trackNotFound')}}
   </q-banner>
 
   <q-banner v-else class="text-white bg-red container-340">
     <template v-slot:avatar>
       <q-icon name="tv_off" />
     </template>
-    $t('bookNotFound')
+    {{$t('bookNotFound')}}
   </q-banner>
 </template>
 
@@ -39,7 +44,6 @@
 import {
   defineComponent,
   computed,
-  watch,
 } from 'vue';
 import {
   useRoute,
@@ -51,7 +55,7 @@ import { useMediaControls } from 'lib/useAudio';
 
 import PlayerControls from 'components/PlayerControls.vue';
 import BookHeader from 'components/BookHeader.vue';
-import BookFooter from 'components/BookFooter.vue';
+import BookmarkList from 'components/BookmarkList.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
@@ -60,7 +64,7 @@ export default defineComponent({
   components: {
     PlayerControls,
     BookHeader,
-    BookFooter,
+    BookmarkList,
   },
 
   setup() {
@@ -69,6 +73,8 @@ export default defineComponent({
     const {
       play,
       pause,
+      shouldBePlaying,
+      currentTime,
     } = useMediaControls();
 
     const currentBook = useCurrentBook();
@@ -88,7 +94,16 @@ export default defineComponent({
       });
     }
 
+    function saveLastRead(position) {
+      if (currentBook.value) {
+        currentBook.value.bookmarks.lastRead = position.toFixed();
+      }
+    }
+
     function handleSeek(newPosition) {
+      if (shouldBePlaying.value) {
+        saveLastRead(newPosition);
+      }
       navigateTimestamp(newPosition);
     }
 
@@ -99,25 +114,23 @@ export default defineComponent({
     function handleEnded(newPosition) {
       if (newPosition < currentBook.value.length) {
         navigateTimestamp(newPosition);
+        saveLastRead(newPosition);
       } else {
         pause();
         navigateTimestamp(0);
+        saveLastRead(0);
       }
     }
 
     function handlePlay() {
+      saveLastRead(currentTrack.value.start + currentTime.value);
       play();
     }
 
     function handlePause() {
+      saveLastRead(currentTrack.value.start + currentTime.value);
       pause();
     }
-
-    watch(route, () => {
-      if (currentBook.value) {
-        currentBook.value.lastRead = currentTimestamp.value;
-      }
-    });
 
     return {
       currentBook,

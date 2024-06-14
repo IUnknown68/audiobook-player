@@ -3,7 +3,6 @@ import {
   computed,
 } from 'vue';
 import { useRoute } from 'vue-router';
-import { useLocalStorage } from '@vueuse/core';
 import axios from 'axios';
 
 import {
@@ -13,6 +12,8 @@ import {
 import {
   getTrack,
 } from './useTracks';
+
+import useBookmarks from './useBookmarks';
 
 const BASE_URL = new URL('/audiobooks/', window.location.href);
 
@@ -106,7 +107,7 @@ function bookFromJson(data, bookUrl) {
   book.url = bookUrl;
   book.cover = new URL(book.cover, book.url);
 
-  book.lastRead = useLocalStorage(`book:${book.id}`, 0);
+  book.bookmarks = useBookmarks(book.id);
 
   if (book.series) {
     getSeries(book.series, true).books.push(book.id);
