@@ -1,6 +1,7 @@
 import MainLayout from 'layouts/MainLayout.vue';
 
 import PlayerPage from 'pages/PlayerPage.vue';
+import AboutPage from 'pages/AboutPage.vue';
 import IndexPage from 'pages/IndexPage.vue';
 
 import ErrorNotFound from 'pages/ErrorNotFound.vue';
@@ -10,6 +11,11 @@ const routes = [
     path: '/',
     component: MainLayout,
     children: [
+      {
+        path: '/about',
+        name: 'about',
+        component: AboutPage,
+      },
       {
         path: '/play/:bookId/:timestamp?',
         name: 'player',

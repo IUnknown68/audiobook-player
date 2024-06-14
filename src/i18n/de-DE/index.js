@@ -13,5 +13,6 @@ export default {
   addBookmark: 'Lesezeichen hinzufügen',
   lastRead: 'Letzte Position',
   furthestRead: 'Späteste Position',
-  language: 'Sprache',
+  about: 'Info',
+  version: 'Version',
 };

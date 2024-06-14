@@ -34,13 +34,21 @@
       >
         <SelectLocale clickable />
         <q-item>
+          <q-toggle
+            v-model="darkmode"
+            v-close-popup
+            :label="$t('darkMode')"
+          />
+        </q-item>
+        <q-item
+          :to="{name:'about'}"
+          class="text-page"
+        >
+          <q-item-section avatar>
+            <q-icon name="sym_o_info" />
+          </q-item-section>
           <q-item-section>
-            <q-toggle
-              v-model="darkmode"
-              v-close-popup
-              color="yellow"
-              :label="$t('darkMode')"
-            />
+            {{$t('about')}}
           </q-item-section>
         </q-item>
       </q-menu>

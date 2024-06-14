@@ -13,5 +13,6 @@ export default {
   addBookmark: 'Add Bookmark',
   lastRead: 'Last position',
   furthestRead: 'Furthest position',
-  language: 'Language',
+  about: 'Info',
+  version: 'Version',
 };

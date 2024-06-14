@@ -13,6 +13,12 @@
 const { mergeConfig } = require('vite');
 const { configure } = require('quasar/wrappers');
 const path = require('path');
+const {
+  version,
+  description,
+  productName,
+  author,
+} = require('./package.json');
 
 // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
 const devServer = (process.env.USE_SEIBERSPACE)
@@ -86,7 +92,12 @@ module.exports = configure((/* ctx */) => ({
 
     // publicPath: '/',
     // analyze: true,
-    // env: {},
+    env: {
+      VERSION: version,
+      DESCRIPTION: description,
+      PRODUCTNAME: productName,
+      AUTHOR: author,
+    },
     // rawDefine: {}
     // ignorePublicFolder: true,
     // minify: false,

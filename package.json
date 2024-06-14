@@ -1,6 +1,6 @@
 {
   "name": "audiobook-player",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A simple Audiobook player.",
   "productName": "Audiobooks",
   "author": "Arne Seib <arne42@seiberspace.de>",
