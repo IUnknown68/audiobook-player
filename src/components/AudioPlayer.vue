@@ -16,11 +16,10 @@
       @play="handlePlay"
     />
     <div class="flex no-wrap justify-end items-center gap-md q-mb-md">
-      <BookmarkList
+      <BookmarkMenuButton
         flat
         round
         color="primary"
-        icon="bookmarks"
       />
     </div>
   </div>
@@ -55,7 +54,7 @@ import { useMediaControls } from 'lib/useAudio';
 
 import PlayerControls from 'components/PlayerControls.vue';
 import BookHeader from 'components/BookHeader.vue';
-import BookmarkList from 'components/BookmarkList.vue';
+import BookmarkMenuButton from 'components/BookmarkMenuButton.vue';
 
 //------------------------------------------------------------------------------
 export default defineComponent({
@@ -64,7 +63,7 @@ export default defineComponent({
   components: {
     PlayerControls,
     BookHeader,
-    BookmarkList,
+    BookmarkMenuButton,
   },
 
   setup() {

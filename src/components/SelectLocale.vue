@@ -1,9 +1,14 @@
 <template>
-  <q-btn
-    flat
-    round
-    :icon="language.icon"
-  >
+  <q-item>
+    <q-item-section avatar>
+      <q-icon :name="language.icon" color="primary" />
+    </q-item-section>
+    <q-item-section>
+      {{language.label}}
+    </q-item-section>
+    <q-item-section side>
+      <q-icon name="keyboard_arrow_right" />
+    </q-item-section>
     <q-menu anchor="bottom right" self="top right">
       <q-list style="min-width: 100px">
         <q-item
@@ -22,7 +27,7 @@
         </q-item>
       </q-list>
     </q-menu>
-  </q-btn>
+  </q-item>
 </template>
 
 <script>

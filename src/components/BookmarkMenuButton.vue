@@ -1,44 +1,59 @@
 <template>
-  <q-btn>
-    <q-menu
-      anchor="bottom end"
-      self="bottom end"
-      auto-close
+  <q-btn
+    :icon="icon"
+    @click="dialog = !dialog"
+  >
+    <q-dialog
+      v-model="dialog"
     >
-      <BookmarkListItem
-        v-for="(bookmark) of bookmarks"
-        :key="bookmark.id"
-        :bookmark="bookmark"
-        :label="bookmark.title"
-      />
-      <BookmarkListItem
-        :bookmark="bookmarkLast"
-        icon="last_page"
-        :label="$t(ID_LAST_READ)"
-        readonly
-      />
-      <BookmarkListItem
-        :bookmark="bookmarkFurthest"
-        icon="schedule"
-        :label="$t(ID_FURTHEST_READ)"
-        readonly
-      />
-      <q-separator />
-      <q-item
-        clickable
-        color="primary"
-        @click="addBookmark"
-      >
-        <q-item-section avatar>
-          <q-icon name="add" color="primary" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>
-            {{$t('addBookmark')}}
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-menu>
+      <q-card class="container-340">
+        <div
+          class="text-subtitle1 text-weight-light q-py-sm q-px-md"
+          style="background: rgba(0, 0, 0, 0.05);"
+        >
+          {{$t('bookmarks')}}
+        </div>
+        <q-list>
+          <BookmarkListItem
+            v-for="(bookmark) of bookmarks"
+            :key="bookmark.id"
+            :bookmark="bookmark"
+            :label="bookmark.title"
+            v-close-popup
+          />
+          <BookmarkListItem
+            :bookmark="bookmarkLast"
+            icon="last_page"
+            :label="$t(ID_LAST_READ)"
+            v-close-popup
+            readonly
+          />
+          <BookmarkListItem
+            :bookmark="bookmarkFurthest"
+            icon="schedule"
+            :label="$t(ID_FURTHEST_READ)"
+            v-close-popup
+            readonly
+          />
+          <q-separator />
+          <q-item
+            clickable
+            color="primary"
+            @click="addBookmark"
+            v-close-popup
+          >
+            <q-item-section avatar>
+              <q-icon name="add" color="primary" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>
+                {{$t('addBookmark')}}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card>
+    </q-dialog>
   </q-btn>
 </template>
 
@@ -46,6 +61,7 @@
 import {
   defineComponent,
   computed,
+  ref,
 } from 'vue';
 import {
   useRoute,
@@ -67,7 +83,7 @@ function userEntriesFilter(entry) {
 
 //------------------------------------------------------------------------------
 export default defineComponent({
-  name: 'BookmarkList',
+  name: 'BookmarkMenuButton',
 
   components: {
     BookmarkListItem,
@@ -83,8 +99,10 @@ export default defineComponent({
         .sort((a, b) => a.ts - b.ts),
     );
 
+    const dialog = ref(false);
     const bookmarkLast = computed(() => currentBook.value.bookmarks.lastRead);
     const bookmarkFurthest = computed(() => currentBook.value.bookmarks.furthestRead);
+    const icon = computed(() => (bookmarks.value.length ? 'bookmarks' : 'sym_o_bookmarks'));
 
     function addBookmark() {
       const currentTrack = currentBook.value?.findTrack(parseInt(route.params.timestamp, 10));
@@ -99,6 +117,8 @@ export default defineComponent({
     return {
       ID_LAST_READ,
       ID_FURTHEST_READ,
+      dialog,
+      icon,
       bookmarks,
       addBookmark,
       bookmarkLast,

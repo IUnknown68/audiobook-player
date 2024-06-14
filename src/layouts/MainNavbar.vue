@@ -21,14 +21,30 @@
       @click="pause"
     />
 
-    <SelectLocale />
-
-    <q-toggle
-      v-model="darkmode"
-      color="yellow"
+    <q-btn
+      v-if="notAtHome"
+      dense
+      flat
+      round
+      icon="more_vert"
     >
-      <q-tooltip>{{$t('darkMode')}}</q-tooltip>
-    </q-toggle>
+      <q-menu
+        anchor="bottom end"
+        self="top end"
+      >
+        <SelectLocale clickable />
+        <q-item>
+          <q-item-section>
+            <q-toggle
+              v-model="darkmode"
+              v-close-popup
+              color="yellow"
+              :label="$t('darkMode')"
+            />
+          </q-item-section>
+        </q-item>
+      </q-menu>
+    </q-btn>
   </q-toolbar>
 </template>
 
